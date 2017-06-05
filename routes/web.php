@@ -15,5 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('inscricoes', 'InscricoesController@index');
+Route::resource('inscricoes', 'InscricoesController');
+
 

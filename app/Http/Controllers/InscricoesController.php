@@ -15,7 +15,6 @@ class InscricoesController extends Controller
     public function index()
     {
         $inscricoes = Inscricao::all();
-
         return view('inscricoes.index')
             ->with('inscricoes', $inscricoes);
     }
@@ -38,7 +37,8 @@ class InscricoesController extends Controller
      */
     public function store(Request $request)
     {
-        //FAZ O CREATE DE 1 RESOURCE
+        $novaInscricao = Inscricao::create( $request->all() );
+        return redirect('inscricoes/'.$novaInscricao->id);
     }
 
     /**
@@ -49,7 +49,8 @@ class InscricoesController extends Controller
      */
     public function show($id)
     {
-        return view('inscricoes.show');
+        $Inscriao = Inscricao::findOrFail($id);
+        return view('inscricoes.show')->with('Inscricao', $Inscriao);
     }
 
     /**
@@ -60,7 +61,8 @@ class InscricoesController extends Controller
      */
     public function edit($id)
     {
-        return view('inscricoes.edit');
+        $Inscricao = Inscricao::findOrFail($id);
+        return view('inscricoes.edit')->with('Inscricao', $Inscricao);
     }
 
     /**
@@ -72,7 +74,9 @@ class InscricoesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Inscricao = Inscricao::findOrFail( $id );
+        $Inscricao->update($request->all());
+        return redirect('inscricoes/'.$Inscricao->id);
     }
 
     /**
@@ -83,6 +87,8 @@ class InscricoesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Inscricao = Inscricao::findOrFail( $id );
+        $Inscricao->delete();
+        return redirect('inscricoes');
     }
 }
