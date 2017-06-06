@@ -42,7 +42,7 @@ class InscricoesController extends Controller
 
         if ( $Inscricao ) {
             \Mail::send('emails.bemvindo', ['Inscricao' => $Inscricao], function ($message) use ($Inscricao) {
-            $message->to($Inscricao->nome, $Inscricao->email)->subject("[Minicurso-Laravel] Voce se inscreveu");
+            $message->to($Inscricao->email, $Inscricao->email)->subject("[Minicurso-Laravel] Voce se inscreveu");
             $message->from('noreply@grupotesseract.com.br', 'Grupo Tesseract');
             });
         }
