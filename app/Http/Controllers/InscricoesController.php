@@ -38,16 +38,16 @@ class InscricoesController extends Controller
      */
     public function store(Request $request)
     {
-        $novaInscricao = Inscricao::create( $request->all() );
+        $Inscricao = Inscricao::create( $request->all() );
 
-        if ( $novaInscricao ) {
+        if ( $Inscricao ) {
             \Mail::send('emails.bemvindo', ['Inscricao' => $Inscricao], function ($message) use ($Inscricao) {
             $message->to($Inscricao->nome, $Inscricao->email)->subject("[Minicurso-Laravel] Voce se inscreveu");
             $message->from('noreply@grupotesseract.com.br', 'Grupo Tesseract');
             });
         }
 
-        return redirect('inscricoes/'.$novaInscricao->id);
+        return redirect('inscricoes/'.$Inscricao->id);
     }
 
     /**
